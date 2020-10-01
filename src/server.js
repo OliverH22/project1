@@ -9,12 +9,12 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const urlStruct = {
   '/': htmlHandler.getIndex,
   '/success': jsonHandler.getSuccess,
-  '/badRequest': jsonHandler.getBadRequest,
+  '/badRequest': jsonHandler.notFound,
   '/unauthorized': jsonHandler.getNotAllowed,
   '/forbidden': jsonHandler.getForbidden,
   '/internal': jsonHandler.getInternal,
   '/notImplemented': jsonHandler.getNotImplemented,
-  notFound: jsonHandler.getBadRequest,
+  notFound: jsonHandler.notFound,
 };
 
 const onRequest = (request, response) => {
