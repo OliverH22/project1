@@ -65,7 +65,7 @@ const notFound = (request, response) => {
   respondJSON(request, response, 404, responseJSON);
 };
 
-const notFoundMeta = (request, response, type) => respondJSONMeta(request, response, 404);
+const notFoundMeta = (request, response, type) => respondJSONMeta(request, response, 404, type);
 
 module.exports = {
   getUserMeta,
