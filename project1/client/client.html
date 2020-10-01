@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Project 1 API</title>
+</head>
+<link rel="stylesheet" type="text/css" href="myStyle.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+
+
+<body>
+
+
+  <div id="news">
+    <h1 id="titleHead">Articles of the Day</h1>
+    <div id="FlexCon">
+      <div id="article-Info">
+        <div id="app">
+         
+          <p>Total Results: {{totalresults}}</p>
+
+          <label for="news">Choose a category:</label>
+
+          <select name="news" id="news" v-model="title">
+            <option value="Business">Business</option>
+            <option value="Economics">Economics</option>
+            <option value="Health">Health</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+          <p>or type out your advance search:</p>
+          News : <input v-model.trim="title">
+          <button class="btn btn-outline-success" type="submit" @click="searchNews" id="searchNews">Search For
+            News</button>
+          <ul id="example-1">
+            <li v-for="article in newsResults.articles">
+              {{ article.title }} - {{article.author}}
+            </li>
+          </ul>
+
+          <!-- <img id="imageTag" v-bind:src="profileImage" v-bind:alt="altText" /> -->
+       
+        </div>
+      </div>
+    </div>
+  
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>
