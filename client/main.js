@@ -15,7 +15,7 @@ const app = new Vue({
 		urlToImage:"",
 		totalresults:"",		
 		newsResults: {},
-		profileImage:"",		
+		link:"",		
 		altText:"no image",
 		searchCity: "",
 		herokuURL: "https://cors-anywhere.herokuapp.com/",
@@ -55,6 +55,7 @@ const app = new Vue({
   		
   				this.author=json.articles[0].author;
 				this.totalresults=json.totalResults;
+				this.link=json.url;
 				this.newsResults=json;		
     			
 		})},
