@@ -36,7 +36,7 @@
             News</button>
           <ul id="example-1">
             <li v-for="article in newsResults.articles">
-              {{ article.title }} - {{article.author}}
+              <a href="article.url">{{ article.title }} - {{article.author}} - {{article.url}}</a>
             </li>
           </ul>
 
