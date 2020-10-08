@@ -34,14 +34,18 @@
           News : <input v-model.trim="title">
           <button class="btn btn-outline-success" type="submit" @click="searchNews" id="searchNews">Search For
             News</button>
-          <ul id="example-1">
-            <li v-for="article in newsResults.articles">
-              <a href="article.url">{{ article.title }} - {{article.author}} - {{article.url}}</a>
-            </li>
-          </ul>
-
-          <!-- <img id="imageTag" v-bind:src="profileImage" v-bind:alt="altText" /> -->
-       
+                    
+            
+              <form action="/action_page.php" v-for="article in newsResults.articles">
+                <input type="radio" id="newsStuff" name="newsStuff" value="{{ article.title }}">
+                <label for="{{ article.title }}">{{ article.title }} - </label>
+                <label for="{{article.author}}">{{article.author}}</label><br><br>
+                <label for="newStuff"><a href="{{article.url}}">{{article.url}}</a></label><br><br>
+                
+                   
+            </form><br><br>            
+            <input id = "btn" type="submit" value="Save Article">      
+          
         </div>
       </div>
     </div>
