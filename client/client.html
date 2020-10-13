@@ -1,6 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script type="text/babel">
+    const handleResponse = (xhr, parseResponse) => {
+      const content = document.querySelector('#content');
+      const acceptTypes = xhr.getResponseHeader('content-type');
+
+      if(acceptTypes === 'application/json')
+      {
+      switch(xhr.status)
+      {
+        case 200:
+          content.innerHTML = '<b>Success</b>';
+          break;
+        case 201:
+          content.innerHTML = '<b>Created</b>';
+          break;
+        case 400:
+          content.innerHTML = '<b>Bad Request</b>';
+          break;
+        case 401:
+          content.innerHTML = '<b>Unauthorized</b>';
+          break;
+        case 403:
+          content.innerHTML = '<b>Forbidden</b>';
+          break;
+        case 404:
+          content.innerHTML = '<b>Not Found</b>';
+          break;
+        case 500:
+          content.innerHTML = '<b>Internal Server Error</b>';
+          break;
+        case 501:
+          content.innerHTML = '<b>Internal Server Error</b>';
+          break;
+        default:
+          content.innerHTML = '<b>The page was not made</b>';
+          break;
+      }
+      if(parseResponse)
+      {
+        const obj = JSON.parse(xhr.response);
+        content.innerHTML += `<p>${xhr.response}</p>`;
+        content.innerHTML += `<p>${obj.message}</p>`;
+      }
+      else if(acceptTypes === 'text/xml'){
+        const id = xhr.responseXML.querySelector('id').textContent;
+        const message = xhr.responseXML.querySelector('message').textContent;
+      }
+    }
+      
+    };
+
+    const requestUpdate = (e, userForm) => {
+      e.preventDefault();
+      const url = userForm.querySelector('#urlField').value;
+      const method = userForm.querySelector('#methodSelect').value;
+      
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+
+      xhr.setRequestHeader('Accept','application/json');
+
+      if(method === 'get')
+      {
+        xhr.onload = () => handleResponse(xhr, true);
+      }
+      else{
+        xhr.onload = () => handleResponse(xhr, false);
+      }
+
+      xhr.send();
+
+      
+      return false;
+    };
+
+
+    const init = () => {
+      const userForm = document.querySelector('#userForm');
+      const btn = document.querySelector('#btnSaver')
+      
+      const getUsers = (e) => requestUpdate(e, userForm);
+      
+      btn.addEventListener('submit', getUsers);
+    };
+
+    window.onload = init;
+  </script> -->
+
 <head>
   <meta charset="utf-8" />
   <title>Project 1 API</title>
@@ -22,30 +111,36 @@
          
           <p>Total Results: {{totalresults}}</p>
 
-          <label for="news">Choose a category:</label>
+          <form action="/addUser" method="post">
+            <label for="name">Username: </label>
+            <input id="nameField" type="text" name="name" />
+            <input type="submit" value="Add User"> <br><br>           
+          </form><br>  
 
-          <select name="news" id="news" v-model="title">
-            <option value="Business">Business</option>
-            <option value="Economics">Economics</option>
-            <option value="Health">Health</option>
-            <option value="Marketing">Marketing</option>
-          </select>
-          <p>or type out your advance search:</p>
+       
+          <p>Type out a topic for news to search:</p>
           News : <input v-model.trim="title">
           <button class="btn btn-outline-success" type="submit" @click="searchNews" id="searchNews">Search For
             News</button>
-                    
+              
             
-              <form action="/action_page.php" v-for="article in newsResults.articles">
+              <form action="/addFav" v-for="article in newsResults.articles" method="post">
                 <input type="radio" id="newsStuff" name="newsStuff" value="{{ article.title }}">
                 <label for="{{ article.title }}">{{ article.title }} - </label>
                 <label for="{{article.author}}">{{article.author}}</label><br><br>
                 <label for="newStuff"><a href="{{article.url}}">{{article.url}}</a></label><br><br>
                 
-                   
+                <input type="submit" value="Save Article"> <br><br>      
             </form><br><br>            
-            <input id = "btn" type="submit" value="Save Article">      
-          
+           
+
+            <form id="userForm" action="/getUsers" method="get">
+            <select id="methodSelect">              
+              <option value="get">GET</option>              
+            </select>
+
+            <input id = "btn" type="submit" value="Get User"/>
+            </form>
         </div>
       </div>
     </div>
