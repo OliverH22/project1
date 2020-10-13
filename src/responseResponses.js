@@ -20,6 +20,14 @@ const getUser = (request, response) => {
   respondJSON(request, response, 200, responseJSON);
 };
 
+const saveArt = (request, response) => {
+  const responseJSON = {
+    User,
+    message: 'This is a successful response',
+  };
+  respondJSON(request, response, 200, responseJSON);
+};
+
 const getUserMeta = (request, response) => {
   const responseJSON = {
     User,
@@ -30,7 +38,7 @@ const getUserMeta = (request, response) => {
 
 const addUser = (request, response, type) => {
   const responseJSON = {
-    message: 'Name and age are both required',
+    message: 'Name required',
   };
   if (!type.name || !type.age) {
     responseJSON.id = 'missingParams';
@@ -73,4 +81,5 @@ module.exports = {
   notFoundMeta,
   getUser,
   addUser,
+  saveArt,
 };
